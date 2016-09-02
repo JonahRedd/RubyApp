@@ -15,7 +15,7 @@ development:
   database: rubyapp
   username: postgres
   password: monmodem
-  host: localhost
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,11 +25,10 @@ test:
   database: rubyapp
   username: postgres
   password: monmodem
-  host: localhost
+
 
 production:
   <<: *default
   database: rubyapp
   username: postgres
   password: monmodem
-  host: localhost
