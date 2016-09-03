@@ -1,9 +1,19 @@
-<h2><%= @book.title %></h2>
-<h3><%= @book.author %></h3>
-<h4>Category : <%= @book.category.name %></h4>
+<div class="row">
+    <div class="col-md-4">
+        <%= image_tag @book.book_img.url(:book_show), class: "book-show" %>
+    </div>
+    <div class="col-md-8">
+        <h2><%= @book.title %></h2>
+        <h3>From <strong><%= @book.author %></strong></h3>
+        <p><%= @book.description %></p>
+    </div>
+</div>
 
-<p><%= @book.description %></p>
-
+<div class="row">
+    <div class="col-md-4">
+    <!-- Where the reviews/ratings will go -->
+    </div>    
+</div>    
 <%= link_to "Back", root_path %>
 
 <% if user_signed_in? %>
