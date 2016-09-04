@@ -3,36 +3,57 @@
         <%= image_tag @book.book_img.url(:book_show), class: "book-show" %>
     </div>
     <div class="col-md-8">
-        <h2><%= @book.title %></h2>
-        <h3>From <strong><%= @book.author %></strong></h3>
-        <p><%= @book.description %></p>
+
+        <div class="book-info">
+            <h2 class="book-title"><%= @book.title %></h2>
+            <h3 class="book-author">From <strong><%= @book.author %></strong></h3>
+            <h4 class="avg-rating">Average Rating</h4>
+            <div class="average-review-rating" data-score="<%= @average_review %>"></div>
+            <span class="number-of-reviews">Based on <%= @book.reviews.count %> reviews</span>                
+            <p class="book-desc"><%= @book.description %></p>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <%= render @book.reviews %>
+        <div class="reviews">    
+            <h1>Reviews</h1>    
+            <%= render @book.reviews %>
+        
 
-        <div>
-            <%= link_to "Add Review", new_book_review_path(@book) %>
+            <div>
+                <%= link_to "Add Review", new_book_review_path(@book), class: "btn-custom" %>
 
+            </div>    
         </div>    
 
     </div>    
-</div>    
-<%= link_to "Back", root_path %>
+</div>   
+<div class="links btn-group"> 
+<%= link_to "Back", root_path, class: "btn btn-custom" %>
 
 <% if user_signed_in? %>
     <% if @book.user_id == current_user.id %>
 
-        <%= link_to "Edit", edit_book_path(@book) %>
-        <%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure ?"} %>
+        <%= link_to "Edit", edit_book_path(@book), class: "btn btn-custom" %>
+        <%= link_to "Delete", book_path(@book), method: :delete, data: {confirm: "Are you sure ?"}, class: "btn btn-custom" %>
 
     <% end %>
 <% end %>
-
+</div>
 <script>
     $('.review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        path: '/assets/'
+    });
+</script>
+
+<script>
+    $('.average-review-rating').raty({
         readOnly: true,
         score: function() {
             return $(this).attr('data-score');
